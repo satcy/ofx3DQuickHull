@@ -24,4 +24,5 @@ class ofApp : public ofBaseApp{
     ofEasyCam cam;
     ofMesh mesh;
     ofMesh origin;
+    stringstream str;
 };

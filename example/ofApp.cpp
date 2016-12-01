@@ -28,7 +28,8 @@ void ofApp::update(){
     }
     float t = ofGetElapsedTimef();
     mesh = ofx3DQuickHull::quickhull3d(verts);
-    cout << "TIME(count / sec): " << num << " / " << ofGetElapsedTimef() - t << endl;
+    str.str("");
+    str << "Process Time[num / sec]: " << num << " / " << ofGetElapsedTimef() - t << endl;
 }
 
 //--------------------------------------------------------------
@@ -48,6 +49,9 @@ void ofApp::draw(){
     origin.drawVertices();
     
     cam.end();
+    ofSetColor(255);
+    ofDrawBitmapString("FPS: " + ofToString(ofGetFrameRate()), 5, 10);
+    ofDrawBitmapString(str.str(), 5, 25);
 }
 
 //--------------------------------------------------------------
