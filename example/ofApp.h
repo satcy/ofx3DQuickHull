@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 
+#include "ofx3DQuickHull.h"
 
 class ofApp : public ofBaseApp{
 
@@ -24,5 +25,6 @@ class ofApp : public ofBaseApp{
     ofEasyCam cam;
     ofMesh mesh;
     ofMesh origin;
+    ofLight light;
     stringstream str;
 };

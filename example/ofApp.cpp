@@ -1,16 +1,16 @@
 #include "ofApp.h"
 
-#include "ofx3DQuickHull.h"
-
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofBackground(0);
-    
-    
+    ofSetLineWidth(2);
+    light.setDirectional();
+    light.setOrientation(ofVec3f(ofRandomf()*180, ofRandomf()*180, ofRandomf()*180));
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    light.pan(-3);
     static int MAX_NUM = 2000;
     int num = ofGetFrameNum()%MAX_NUM;
     if ( num < 4 ) num = 4;
@@ -20,14 +20,15 @@ void ofApp::update(){
     float noise = int(ofGetFrameNum()/MAX_NUM);
     origin.clear();
     for ( auto & pt : verts ) {
-        pt.x = ofSignedNoise(i*0.57, 1, noise) * radius;
-        pt.y = ofSignedNoise(i*0.43, 1.5, noise) * radius;
-        pt.z = ofSignedNoise(i*0.35, 2.9, noise) * radius;
+        pt.x = ofSignedNoise(i*0.057, 1, noise) * radius;
+        pt.y = ofSignedNoise(i*0.043, 1.5, noise) * radius;
+        pt.z = ofSignedNoise(i*0.035, 2.9, noise) * radius;
         origin.addVertex(pt);
         i++;
     }
     float t = ofGetElapsedTimef();
     mesh = ofx3DQuickHull::quickhull3d(verts);
+    str.clear();
     str.str("");
     str << "Process Time[num / sec]: " << num << " / " << ofGetElapsedTimef() - t << endl;
 }
@@ -38,9 +39,12 @@ void ofApp::draw(){
     ofEnableDepthTest();
     ofEnableAlphaBlending();
     ofRotateY(ofGetElapsedTimef()*10.0);
-    ofSetColor(255, 180);
+    ofSetColor(255, 255);
+    light.enable();
     mesh.draw();
-    ofSetColor(0, 255);
+    light.disable();
+    ofDisableLighting();
+    ofSetColor(0, 255, 0, 255);
     mesh.drawWireframe();
     
     glPointSize(3);
