@@ -41,7 +41,6 @@ namespace ofx3DQuickHull {
         }
         
         qh_free_mesh(m);
-        QH_FREE(m.normals);
         QH_FREE(vertices);
         return mesh;
     }
