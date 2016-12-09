@@ -1,0 +1,3 @@
+[submodule "libs/3d-quickhull"]
+	path = libs/3d-quickhull
+	url = https://github.com/satcy/3d-quickhull.git
